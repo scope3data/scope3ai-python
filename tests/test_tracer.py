@@ -1,5 +1,5 @@
 import pytest
-from ecologits import EcoLogits
+from scope3ai import Scope3AI
 
 from openai import OpenAI
 from anthropic import Anthropic

@@ -2,9 +2,9 @@ import math
 from math import ceil
 from typing import Any, Optional
 
-from ecologits.impacts.dag import DAG
-from ecologits.impacts.modeling import GWP, PE, ADPe, Embodied, Energy, Impacts, Usage
-from ecologits.utils.range_value import RangeValue, ValueOrRange
+from scope3ai.impacts.dag import DAG
+from scope3ai.impacts.modeling import GWP, PE, ADPe, Embodied, Energy, Impacts, Usage
+from scope3ai.utils.range_value import RangeValue, ValueOrRange
 
 MODEL_QUANTIZATION_BITS = 4
 

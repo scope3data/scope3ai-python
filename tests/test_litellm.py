@@ -1,7 +1,7 @@
 import pytest
 import litellm
 
-from ecologits.tracers.litellm_tracer import litellm_match_model
+from scope3ai.tracers.litellm_tracer import litellm_match_model
 
 
 @pytest.mark.parametrize("model_name,expected_tuple", [

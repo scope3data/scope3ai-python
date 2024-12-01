@@ -5,9 +5,9 @@ from typing import Any, Callable, Union
 
 from wrapt import wrap_function_wrapper
 
-from ecologits._ecologits import EcoLogits
-from ecologits.impacts import Impacts
-from ecologits.tracers.utils import llm_impacts
+from scope3ai._scope3ai import Scope3AI
+from scope3ai.impacts import Impacts
+from scope3ai.tracers.utils import llm_impacts
 
 try:
     import tiktoken
@@ -68,7 +68,7 @@ def huggingface_chat_wrapper_non_stream(
         model_name=instance.model,
         output_token_count=output_tokens,
         request_latency=request_latency,
-        electricity_mix_zone=EcoLogits.config.electricity_mix_zone
+        electricity_mix_zone=Scope3AI.config.electricity_mix_zone
     )
     if impacts is not None:
         return ChatCompletionOutput(**asdict(response), impacts=impacts)
@@ -93,7 +93,7 @@ def huggingface_chat_wrapper_stream(
             model_name=instance.model,
             output_token_count=token_count,
             request_latency=request_latency,
-            electricity_mix_zone=EcoLogits.config.electricity_mix_zone
+            electricity_mix_zone=Scope3AI.config.electricity_mix_zone
         )
         if impacts is not None:
             yield ChatCompletionStreamOutput(**asdict(chunk), impacts=impacts)
@@ -129,7 +129,7 @@ async def huggingface_async_chat_wrapper_non_stream(
         model_name=instance.model,
         output_token_count=output_tokens,
         request_latency=request_latency,
-        electricity_mix_zone=EcoLogits.config.electricity_mix_zone
+        electricity_mix_zone=Scope3AI.config.electricity_mix_zone
     )
     if impacts is not None:
         return ChatCompletionOutput(**asdict(response), impacts=impacts)
@@ -154,7 +154,7 @@ async def huggingface_async_chat_wrapper_stream(
             model_name=instance.model,
             output_token_count=token_count,
             request_latency=request_latency,
-            electricity_mix_zone=EcoLogits.config.electricity_mix_zone
+            electricity_mix_zone=Scope3AI.config.electricity_mix_zone
         )
         if impacts is not None:
             yield ChatCompletionStreamOutput(**asdict(chunk), impacts=impacts)

@@ -1,15 +1,14 @@
 from typing import Optional
 
-from ecologits.electricity_mix_repository import electricity_mixes
-from ecologits.impacts.llm import compute_llm_impacts
-from ecologits.impacts.modeling import Impacts
-from ecologits.log import logger
-from ecologits.model_repository import ArchitectureTypes, models
+from scope3ai.electricity_mix_repository import electricity_mixes
+from scope3ai.impacts.llm import compute_llm_impacts
+from scope3ai.impacts.modeling import Impacts
+from scope3ai.log import logger
+from scope3ai.model_repository import ArchitectureTypes, models
 
 
 def _avg(value_range: tuple) -> float:
     return sum(value_range) / len(value_range)
-
 
 def llm_impacts(
     provider: str,

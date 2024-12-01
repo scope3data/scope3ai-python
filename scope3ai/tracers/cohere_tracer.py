@@ -4,9 +4,9 @@ from typing import Any, Callable
 
 from wrapt import wrap_function_wrapper
 
-from ecologits._ecologits import EcoLogits
-from ecologits.impacts import Impacts
-from ecologits.tracers.utils import llm_impacts
+from scope3ai._scope3ai import Scope3AI
+from scope3ai.impacts import Impacts
+from scope3ai.tracers.utils import llm_impacts
 
 try:
     from cohere import AsyncClient, Client
@@ -52,7 +52,7 @@ def cohere_chat_wrapper(
         model_name=model_name,
         output_token_count=output_tokens,
         request_latency=request_latency,
-        electricity_mix_zone=EcoLogits.config.electricity_mix_zone
+        electricity_mix_zone=Scope3AI.config.electricity_mix_zone
     )
     return NonStreamedChatResponse(**response.dict(), impacts=impacts)
 
@@ -70,7 +70,7 @@ async def cohere_async_chat_wrapper(
         model_name=model_name,
         output_token_count=output_tokens,
         request_latency=request_latency,
-        electricity_mix_zone=EcoLogits.config.electricity_mix_zone
+        electricity_mix_zone=Scope3AI.config.electricity_mix_zone
     )
     return NonStreamedChatResponse(**response.dict(), impacts=impacts)
 
@@ -90,7 +90,7 @@ def cohere_stream_chat_wrapper(
                 model_name=model_name,
                 output_token_count=output_tokens,
                 request_latency=request_latency,
-                electricity_mix_zone=EcoLogits.config.electricity_mix_zone
+                electricity_mix_zone=Scope3AI.config.electricity_mix_zone
             )
             yield StreamEndStreamedChatResponse(**event.dict(), impacts=impacts)
         else:
@@ -112,7 +112,7 @@ async def cohere_async_stream_chat_wrapper(
                 model_name=model_name,
                 output_token_count=output_tokens,
                 request_latency=request_latency,
-                electricity_mix_zone=EcoLogits.config.electricity_mix_zone
+                electricity_mix_zone=Scope3AI.config.electricity_mix_zone
             )
             yield StreamEndStreamedChatResponse(**event.dict(), impacts=impacts)
         else:

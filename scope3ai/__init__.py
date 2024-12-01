@@ -1,7 +1,7 @@
-from ._ecologits import EcoLogits
+from ._scope3ai import Scope3AI
 
-__version__ = "0.5.1"
+__version__ = "0.1.0"
 __all__ = [
     "__version__",
-    "EcoLogits"
+    "Scope3AI"
 ]

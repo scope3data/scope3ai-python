@@ -1,4 +1,4 @@
-from ecologits.electricity_mix_repository import ElectricityMixRepository, ElectricityMix
+from scope3ai.electricity_mix_repository import ElectricityMixRepository, ElectricityMix
 
 
 def test_create_electricity_mix_repository_default():

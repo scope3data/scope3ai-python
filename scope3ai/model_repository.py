@@ -5,7 +5,7 @@ from typing import Optional, Union
 
 from pydantic import BaseModel
 
-from ecologits.utils.range_value import ValueOrRange
+from scope3ai.utils.range_value import ValueOrRange
 
 
 class Providers(Enum):

@@ -1,12 +1,12 @@
-class EcoLogitsError(Exception):
+class Scope3AIError(Exception):
     pass
 
 
-class TracerInitializationError(EcoLogitsError):
+class TracerInitializationError(Scope3AIError):
     """Tracer is initialized twice"""
     pass
 
 
-class ModelingError(EcoLogitsError):
+class ModelingError(Scope3AIError):
     """Operation or computation not allowed"""
     pass

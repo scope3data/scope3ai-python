@@ -127,18 +127,28 @@ class ImpactMetrics(BaseModel):
     usage_water_ml: Optional[float] = Field(0, ge=0, le=100000000)
     embodied_emissions_gco2e: Optional[float] = Field(0, ge=0, le=100000000)
     embodied_water_ml: Optional[float] = Field(0, ge=0, le=100000000)
+    errors: Optional[List[str]] = None
 
     def __add__(self, other: 'ImpactMetrics') -> 'ImpactMetrics':
         if not isinstance(other, ImpactMetrics):
             raise ValueError("Can only add ImpactMetrics with another ImpactMetrics instance")
+        
+        errors = (self.errors or []) + (other.errors or [])
+        if len(errors) == 0:
+            errors = None
         
         return ImpactMetrics(
             usage_energy_wh=(self.usage_energy_wh or 0) + (other.usage_energy_wh or 0),
             usage_emissions_gco2e=(self.usage_emissions_gco2e or 0) + (other.usage_emissions_gco2e or 0),
             usage_water_ml=(self.usage_water_ml or 0) + (other.usage_water_ml or 0),
             embodied_emissions_gco2e=(self.embodied_emissions_gco2e or 0) + (other.embodied_emissions_gco2e or 0),
-            embodied_water_ml=(self.embodied_water_ml or 0) + (other.embodied_water_ml or 0)
+            embodied_water_ml=(self.embodied_water_ml or 0) + (other.embodied_water_ml or 0),
+            errors=errors
         )
+    
+class ImpactResponseRowError(BaseModel):
+    """Error response from the API"""
+    message: str
     
 class ImpactResponseRow(BaseModel):
     """Single row of impact data from the API response"""
@@ -146,6 +156,7 @@ class ImpactResponseRow(BaseModel):
     inference_impact: ImpactMetrics
     training_impact: ImpactMetrics
     total_impact: ImpactMetrics
+    error: Optional[ImpactResponseRowError] = None
 
 class ImpactResponse(BaseModel):
     """Complete response from the impact API"""
@@ -203,12 +214,15 @@ class Scope3API():
                 headers=headers,
             )
             response.raise_for_status()
-            # self.logger.debug(f"Response: {response.text}")
+            self.logger.debug(f"Response: {response.text}")
 
             impact_response = ImpactResponse.model_validate(response.json())
             sum = ImpactMetrics()
             for impact_row in impact_response.rows:
-                sum += impact_row.total_impact
+                if impact_row.error is not None:
+                    sum.errors = (sum.errors or []) + [impact_row.error.message]
+                else:
+                    sum += impact_row.total_impact
             return sum
             
         except Exception as e:

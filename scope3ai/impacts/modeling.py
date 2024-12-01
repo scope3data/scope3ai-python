@@ -2,8 +2,8 @@ from functools import total_ordering
 
 from pydantic import BaseModel
 
-from ecologits.exceptions import ModelingError
-from ecologits.utils.range_value import ValueOrRange
+from scope3ai.exceptions import ModelingError
+from scope3ai.utils.range_value import ValueOrRange
 
 
 @total_ordering

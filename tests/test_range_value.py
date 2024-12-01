@@ -1,4 +1,4 @@
-from ecologits.utils.range_value import RangeValue
+from scope3ai.utils.range_value import RangeValue
 
 
 def test_range_formats_ok():

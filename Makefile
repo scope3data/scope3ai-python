@@ -3,8 +3,7 @@
 install:
 	poetry install --all-extras --with dev,docs
 
-.PHONY: test
-test:
+test: install
 	poetry run pytest
 
 .PHONY: test-record

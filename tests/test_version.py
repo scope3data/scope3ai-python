@@ -3,7 +3,7 @@ from typing import Optional
 
 import toml
 
-from ecologits import __version__
+from scope3ai import __version__
 
 
 def test_version_alignment():

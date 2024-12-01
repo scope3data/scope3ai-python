@@ -4,9 +4,9 @@ from typing import Any, Callable
 
 from wrapt import wrap_function_wrapper
 
-from ecologits._ecologits import EcoLogits
-from ecologits.impacts import Impacts
-from ecologits.tracers.utils import llm_impacts
+from scope3ai._scope3ai import Scope3AI
+from scope3ai.impacts import Impacts
+from scope3ai.tracers.utils import llm_impacts
 
 try:
     from mistralai.async_client import MistralAsyncClient
@@ -47,7 +47,7 @@ def mistralai_chat_wrapper(
         model_name=response.model,
         output_token_count=response.usage.completion_tokens,
         request_latency=request_latency,
-        electricity_mix_zone=EcoLogits.config.electricity_mix_zone
+        electricity_mix_zone=Scope3AI.config.electricity_mix_zone
     )
     if impacts is not None:
         return ChatCompletionResponse(**response.model_dump(), impacts=impacts)
@@ -71,7 +71,7 @@ def mistralai_chat_wrapper_stream(
             model_name=model_name,
             output_token_count=token_count,
             request_latency=request_latency,
-            electricity_mix_zone=EcoLogits.config.electricity_mix_zone
+            electricity_mix_zone=Scope3AI.config.electricity_mix_zone
         )
         if impacts is not None:
             yield ChatCompletionStreamResponse(**chunk.model_dump(), impacts=impacts)
@@ -93,7 +93,7 @@ async def mistralai_async_chat_wrapper(
         model_name=response.model,
         output_token_count=response.usage.completion_tokens,
         request_latency=request_latency,
-        electricity_mix_zone=EcoLogits.config.electricity_mix_zone
+        electricity_mix_zone=Scope3AI.config.electricity_mix_zone
     )
     if impacts is not None:
         return ChatCompletionResponse(**response.model_dump(), impacts=impacts)
@@ -120,7 +120,7 @@ async def mistralai_async_chat_wrapper_stream(
             model_name=model_name,
             output_token_count=token_count,
             request_latency=request_latency,
-            electricity_mix_zone=EcoLogits.config.electricity_mix_zone
+            electricity_mix_zone=Scope3AI.config.electricity_mix_zone
         )
         if impacts is not None:
             yield ChatCompletionStreamResponse(**chunk.model_dump(), impacts=impacts)

@@ -2,9 +2,9 @@ import operator
 
 import pytest
 
-from ecologits.impacts.modeling import Impact, Energy, GWP, ADPe, PE
-from ecologits.exceptions import ModelingError
-from ecologits.utils.range_value import RangeValue
+from scope3ai.impacts.modeling import Impact, Energy, GWP, ADPe, PE
+from scope3ai.exceptions import ModelingError
+from scope3ai.utils.range_value import RangeValue
 
 
 impact_config = dict(

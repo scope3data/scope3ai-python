@@ -3,8 +3,8 @@ import pytest
 import numpy as np
 from operator import gt, ge
 
-from ecologits.impacts.llm import compute_llm_impacts
-from ecologits.impacts.modeling import Impacts, Energy, GWP, ADPe, PE, Usage, Embodied
+from scope3ai.impacts.llm import compute_llm_impacts
+from scope3ai.impacts.modeling import Impacts, Energy, GWP, ADPe, PE, Usage, Embodied
 
 @pytest.mark.parametrize(
     ['model_active_parameter_count', 'model_total_parameter_count', 'output_token_count', 'request_latency', 'if_electricity_mix_adpe', 'if_electricity_mix_pe', 'if_electricity_mix_gwp'],

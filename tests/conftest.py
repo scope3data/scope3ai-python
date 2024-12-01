@@ -3,7 +3,7 @@ import os
 import pytest
 import tiktoken
 
-from ecologits import EcoLogits
+from scope3ai import Scope3AI
 
 
 tiktoken.get_encoding("cl100k_base")
@@ -39,4 +39,4 @@ def vcr_config():
 
 @pytest.fixture(scope="session")
 def tracer_init():
-    EcoLogits.init()
+    Scope3AI.init()
